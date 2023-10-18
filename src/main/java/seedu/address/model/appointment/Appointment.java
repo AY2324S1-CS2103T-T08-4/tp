@@ -41,7 +41,8 @@ public class Appointment {
      * @param appointmentTime The scheduled time for the appointment.
      * @param appointmentDescription The description for the appointment.
      */
-    public Appointment(Patient patient, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription) {
+    public Appointment(Patient patient, AppointmentTime appointmentTime,
+                       AppointmentDescription appointmentDescription) {
         requireAllNonNull(appointmentTime);
         this.appointmentTime = appointmentTime;
         this.patient = patient;

@@ -13,10 +13,10 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A patient is considered unique by comparing using {@code Patient#isSamePerson(Patient)}. As such, adding and updating of
- * persons uses Patient#isSamePerson(Patient) for equality so as to ensure that the patient being added or updated is
- * unique in terms of identity in the UniquePatientList. However, the removal of a patient uses Patient#equals(Object) so
- * as to ensure that the patient with exactly the same fields will be removed.
+ * A patient is considered unique by comparing using {@code Patient#isSamePerson(Patient)}. As such, adding and updating
+ * of persons uses Patient#isSamePerson(Patient) for equality so as to ensure that the patient being added or updated is
+ * unique in terms of identity in the UniquePatientList. However, the removal of a patient uses Patient#equals(Object)
+ * so as to ensure that the patient with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
