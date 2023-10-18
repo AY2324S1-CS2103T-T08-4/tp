@@ -29,7 +29,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getPatientList());
     }
 
     @Test
@@ -81,12 +81,12 @@ public class AddressBookTest {
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPatientList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{patients=" + addressBook.getPersonList()
+        String expected = AddressBook.class.getCanonicalName() + "{patients=" + addressBook.getPatientList()
                 + ", appointments=" + addressBook.getAppointmentList() + "}";
         assertEquals(expected, addressBook.toString());
     }
@@ -103,7 +103,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Patient> getPersonList() {
+        public ObservableList<Patient> getPatientList() {
             return patients;
         }
 

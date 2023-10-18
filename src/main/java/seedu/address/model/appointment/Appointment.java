@@ -62,7 +62,7 @@ public class Appointment {
      * @param addressBook The AddressBook model
      */
     public void setPatient(AddressBook addressBook) {
-        this.patient = addressBook.getPersonList().get(patientId - 1);
+        this.patient = addressBook.getPatientList().get(patientId - 1);
     }
 
     public int getPatientId() {
