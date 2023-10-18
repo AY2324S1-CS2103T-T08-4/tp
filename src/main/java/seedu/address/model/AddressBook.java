@@ -10,7 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.UniqueAppointmentList;
 import seedu.address.model.person.Patient;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.UniquePatientList;
 
 /**
  * Wraps all data at the address-book level
@@ -18,7 +18,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniquePatientList persons;
     private final UniqueAppointmentList appointments;
 
     /*
@@ -29,7 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniquePatientList();
         appointments = new UniqueAppointmentList();
     }
 
@@ -50,7 +50,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code patients} must not contain duplicate patients.
      */
     public void setPersons(List<Patient> patients) {
-        this.persons.setPersons(patients);
+        this.persons.setPatients(patients);
     }
 
     /**
@@ -97,7 +97,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPerson(Patient target, Patient editedPatient) {
         requireNonNull(editedPatient);
 
-        persons.setPerson(target, editedPatient);
+        persons.setPatient(target, editedPatient);
     }
 
     /**
