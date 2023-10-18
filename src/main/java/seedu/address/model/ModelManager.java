@@ -93,27 +93,27 @@ public class ModelManager implements Model {
     //=========== Patient ================================================================================
 
     @Override
-    public boolean hasPerson(Patient patient) {
+    public boolean hasPatient(Patient patient) {
         requireNonNull(patient);
-        return addressBook.hasPerson(patient);
+        return addressBook.hasPatient(patient);
     }
 
     @Override
     public void deletePerson(Patient target) {
-        addressBook.removePerson(target);
+        addressBook.removePatient(target);
     }
 
     @Override
     public void addPerson(Patient patient) {
-        addressBook.addPerson(patient);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        addressBook.addPatient(patient);
+        updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Patient target, Patient editedPatient) {
+    public void setPatient(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
-        addressBook.setPerson(target, editedPatient);
+        addressBook.setPatient(target, editedPatient);
     }
 
     //=========== Filtered Patient List Accessors =============================================================
@@ -123,12 +123,12 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Patient> getFilteredPersonList() {
+    public ObservableList<Patient> getFilteredPatientList() {
         return filteredPatients;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Patient> predicate) {
+    public void updateFilteredPatientList(Predicate<Patient> predicate) {
         requireNonNull(predicate);
         filteredPatients.setPredicate(predicate);
     }

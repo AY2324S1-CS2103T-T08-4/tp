@@ -14,7 +14,7 @@ import seedu.address.model.person.UniquePatientList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSamePatient comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -36,7 +36,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons and Appointments in the {@code toBeCopied}
+     * Creates an AddressBook using the Patientss and Appointments in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -76,7 +76,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a patient with the same identity as {@code patient} exists in the address book.
      */
-    public boolean hasPerson(Patient patient) {
+    public boolean hasPatient(Patient patient) {
         requireNonNull(patient);
         return patients.contains(patient);
     }
@@ -85,7 +85,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a patient to the address book.
      * The patient must not already exist in the address book.
      */
-    public void addPerson(Patient p) {
+    public void addPatient(Patient p) {
         patients.add(p);
     }
 
@@ -95,7 +95,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The patient identity of {@code editedPatient} must not be the same as another existing patient
      * in the address book.
      */
-    public void setPerson(Patient target, Patient editedPatient) {
+    public void setPatient(Patient target, Patient editedPatient) {
         requireNonNull(editedPatient);
 
         patients.setPatient(target, editedPatient);
@@ -105,7 +105,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Patient key) {
+    public void removePatient(Patient key) {
         patients.remove(key);
     }
 
@@ -152,7 +152,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", patients)
+                .add("patients", patients)
                 .add("appointments", appointments)
                 .toString();
     }
