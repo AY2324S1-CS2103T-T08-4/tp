@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Patient;
 
 /**
  * Container for user visible messages.
@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 public class Messages {
 
     /**
-     * Messages for person class.
+     * Messages for patient class.
      */
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
@@ -49,23 +49,23 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code patient} for display to the user.
      */
-    public static String format(Person person) {
+    public static String format(Patient patient) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(patient.getName())
                 .append("; Gender: ")
-                .append(person.getGender())
+                .append(patient.getGender())
                 .append("; Birthdate: ")
-                .append(person.getBirthdate())
+                .append(patient.getBirthdate())
                 .append("; Phone: ")
-                .append(person.getPhone())
+                .append(patient.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
+                .append(patient.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
+                .append(patient.getAddress())
                 .append("; Illness: ");
-        person.getTags().forEach(builder::append);
+        patient.getTags().forEach(builder::append);
         return builder.toString();
     }
 

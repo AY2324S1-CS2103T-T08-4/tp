@@ -78,9 +78,9 @@ Examples:
 
 * `add name=Cena birthdate=30/12/1993 gender=Male illness=Schizophrenia`
 
-### Listing all persons : `list`
+### Listing all patients : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all patients in the address book.
 
 Format: `list`
 
@@ -114,7 +114,7 @@ Examples:
 * `search name=alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a patient : `delete`
 
 Deletes the specified patient from the patient list.
 

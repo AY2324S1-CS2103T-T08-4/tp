@@ -24,7 +24,7 @@ import seedu.address.model.person.Birthdate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -59,9 +59,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, gender, birthdate, phone, email, address, tagList);
+        Patient patient = new Patient(name, gender, birthdate, phone, email, address, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(patient);
     }
 
     /**

@@ -31,7 +31,7 @@ import seedu.address.model.person.Birthdate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -43,7 +43,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reschedules the appointment of the patient identified "
-            + "by the index number used in the displayed person list. "
+            + "by the index number used in the displayed patient list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
             + PREFIX_ID + "ID "
@@ -67,8 +67,8 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the patient in the filtered patient list to edit
+     * @param editPersonDescriptor details to edit the patient with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -81,40 +81,40 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Patient patientToEdit = lastShownList.get(index.getZeroBased());
+        Patient editedPatient = createEditedPerson(patientToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!patientToEdit.isSamePerson(editedPatient) && model.hasPerson(editedPatient)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(patientToEdit, editedPatient);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPatient)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Patient} with the details of {@code patientToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Patient createEditedPerson(Patient patientToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert patientToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
-        Birthdate updatedBirthdate = editPersonDescriptor.getBirthdate().orElse(personToEdit.getBirthdate());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editPersonDescriptor.getName().orElse(patientToEdit.getName());
+        Gender updatedGender = editPersonDescriptor.getGender().orElse(patientToEdit.getGender());
+        Birthdate updatedBirthdate = editPersonDescriptor.getBirthdate().orElse(patientToEdit.getBirthdate());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(patientToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(patientToEdit.getEmail());
+        Address updatedAddress = editPersonDescriptor.getAddress().orElse(patientToEdit.getAddress());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(patientToEdit.getTags());
 
-        return new Person(updatedName, updatedGender, updatedBirthdate, updatedPhone, updatedEmail,
+        return new Patient(updatedName, updatedGender, updatedBirthdate, updatedPhone, updatedEmail,
                 updatedAddress, updatedTags);
     }
 
@@ -143,8 +143,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the patient with. Each non-empty field value will replace the
+     * corresponding field value of the patient.
      */
     public static class EditPersonDescriptor {
         private Name name;

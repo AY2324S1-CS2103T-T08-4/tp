@@ -11,10 +11,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Patient in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Patient {
 
     // Identity fields
     private final Name name;
@@ -30,8 +30,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Gender gender, Birthdate birthdate, Phone phone, Email email,
-                  Address address, Set<Tag> tags) {
+    public Patient(Name name, Gender gender, Birthdate birthdate, Phone phone, Email email,
+                   Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.gender = gender;
@@ -78,13 +78,13 @@ public class Person {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSamePerson(Patient otherPatient) {
+        if (otherPatient == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPatient != null
+                && otherPatient.getName().equals(getName());
     }
 
     /**
@@ -98,18 +98,18 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Patient)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && gender.equals(otherPerson.gender)
-                && birthdate.equals(otherPerson.birthdate)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        Patient otherPatient = (Patient) other;
+        return name.equals(otherPatient.name)
+                && gender.equals(otherPatient.gender)
+                && birthdate.equals(otherPatient.birthdate)
+                && phone.equals(otherPatient.phone)
+                && email.equals(otherPatient.email)
+                && address.equals(otherPatient.address)
+                && tags.equals(otherPatient.tags);
     }
 
     @Override

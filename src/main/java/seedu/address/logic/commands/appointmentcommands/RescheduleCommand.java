@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Patient;
 
 /**
  * Reschedules an existing appointment
@@ -45,7 +45,7 @@ public class RescheduleCommand extends Command {
     private final AppointmentTime appointmentTime;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Patient}
      */
     public RescheduleCommand(Index index, AppointmentTime appointmentTime) {
         requireNonNull(index);
@@ -80,7 +80,7 @@ public class RescheduleCommand extends Command {
                                                              AppointmentTime newTime) {
         assert appointmentToReschedule != null;
 
-        Person patient = appointmentToReschedule.getPerson();
+        Patient patient = appointmentToReschedule.getPerson();
         AppointmentDescription description = appointmentToReschedule.getAppointmentDescription();
         return new Appointment(patient, newTime, description);
     }

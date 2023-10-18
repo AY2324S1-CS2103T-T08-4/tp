@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a Person's birthdate in the address book.
+ * Represents a Patient's birthdate in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidBirthdate(String)}
  */
 public class Birthdate {

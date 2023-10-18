@@ -18,7 +18,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentTime;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Patient;
 
 /**
  * AddAppointmentCommand class to create and add new appointment.
@@ -58,18 +58,18 @@ public class AddAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> latestPersonList = model.getFilteredPersonList();
+        List<Patient> latestPatientList = model.getFilteredPersonList();
         ObservableList<Appointment> appList = model.getFilteredAppointmentList();
 
 
-        if ((patientIndex) >= latestPersonList.size()) {
+        if ((patientIndex) >= latestPatientList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToAdd = latestPersonList.get(patientIndex - 1);
+        Patient patientToAdd = latestPatientList.get(patientIndex - 1);
 
-        // Add the Person patient to the current appointment
-        currAppointment.setPatient(personToAdd);
+        // Add the Patient patient to the current appointment
+        currAppointment.setPatient(patientToAdd);
 
         // Timeslot is invalid
         if (!AppointmentTime.isValidAppointmentTime(currAppointment.getStartTime(), currAppointment.getEndTime())) {

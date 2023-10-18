@@ -15,10 +15,10 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Patient;
 
 /**
- * Adds a person to the address book.
+ * Adds a patient to the address book.
  */
 public class AddCommand extends Command {
 
@@ -45,14 +45,14 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists in the records";
 
-    private final Person toAdd;
+    private final Patient toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Patient}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Patient patient) {
+        requireNonNull(patient);
+        toAdd = patient;
     }
 
     @Override

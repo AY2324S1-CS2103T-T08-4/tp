@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Patient;
 
 /**
  * Represents an Appointment in the address book.
@@ -18,7 +18,7 @@ public class Appointment {
     private final AppointmentTime appointmentTime;
     private final AppointmentDescription appointmentDescription;
     private int patientId;
-    private Person patient;
+    private Patient patient;
 
     /**
      * Constructs an {@code Appointment}.
@@ -41,7 +41,7 @@ public class Appointment {
      * @param appointmentTime The scheduled time for the appointment.
      * @param appointmentDescription The description for the appointment.
      */
-    public Appointment(Person patient, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription) {
+    public Appointment(Patient patient, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription) {
         requireAllNonNull(appointmentTime);
         this.appointmentTime = appointmentTime;
         this.patient = patient;
@@ -52,7 +52,7 @@ public class Appointment {
      * Used in the AddAppointmentCommand
      * @param patient The patient associated with the appointment.
      */
-    public void setPatient(Person patient) {
+    public void setPatient(Patient patient) {
         this.patient = patient;
     }
 
@@ -84,7 +84,7 @@ public class Appointment {
         return this.appointmentDescription;
     }
 
-    public Person getPerson() {
+    public Patient getPerson() {
         return this.patient;
     }
 

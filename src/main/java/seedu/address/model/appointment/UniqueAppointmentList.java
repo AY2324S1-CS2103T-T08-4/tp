@@ -65,7 +65,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
 
     /**
      * Removes the equivalent appointment from the list.
-     * The person must exist in the list.
+     * The patient must exist in the list.
      */
     public void remove(Appointment toRemove) {
         requireNonNull(toRemove);

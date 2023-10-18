@@ -7,7 +7,7 @@ public class CliSyntax {
 
     public static final Prefix PREFIX_ID = new Prefix("id=");
 
-    /* Person prefix definitions */
+    /* Patient prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("name=");
     public static final Prefix PREFIX_GENDER = new Prefix("gender=");
     public static final Prefix PREFIX_BIRTHDATE = new Prefix("birthdate=");
