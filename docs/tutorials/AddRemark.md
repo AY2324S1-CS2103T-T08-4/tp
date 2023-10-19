@@ -342,14 +342,14 @@ save it with `Model#setPerson()`.
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedperson = new Person(
+        Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), remark, personToEdit.getTags());
 
-        model.setPerson(personToEdit, editedperson);
+        model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedperson));
+        return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
     /**
