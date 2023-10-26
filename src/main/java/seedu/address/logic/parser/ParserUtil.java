@@ -20,6 +20,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.PriorityTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -146,6 +147,16 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    public static PriorityTag parsePriorityTag(String priorityTag) throws ParseException {
+        requireNonNull(priorityTag);
+        String trimmedTag = priorityTag.trim();
+        System.out.println(priorityTag);
+        if (!PriorityTag.isValidPriorityTag(trimmedTag)) {
+            throw new ParseException(PriorityTag.MESSAGE_CONSTRAINTS);
+        }
+        return new PriorityTag(trimmedTag);
     }
 
     /**

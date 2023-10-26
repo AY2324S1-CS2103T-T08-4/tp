@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PATIENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PRIORITY_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
+import seedu.address.model.tag.PriorityTag;
 import seedu.address.model.person.Name;
 
 /**
@@ -36,10 +38,10 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
     public ScheduleCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT_PATIENT, PREFIX_APPOINTMENT_START,
-                        PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION);
+                        PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION, PREFIX_APPOINTMENT_PRIORITY_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_APPOINTMENT_PATIENT, PREFIX_APPOINTMENT_START,
-                PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION)
+                PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION, PREFIX_APPOINTMENT_PRIORITY_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ScheduleCommand.MESSAGE_USAGE));
@@ -62,7 +64,11 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 
         Name patient = ParserUtil.parseName(argMultimap.getValue(PREFIX_APPOINTMENT_PATIENT).get());
 
-        Appointment appointment = new Appointment(patient, appointmentTime, appointmentDescription);
+        PriorityTag priorityTag;
+        priorityTag = ParserUtil
+                .parsePriorityTag(String.valueOf(argMultimap.getAllValues(PREFIX_APPOINTMENT_PRIORITY_TAG).get(0)));
+
+        Appointment appointment = new Appointment(patient, appointmentTime, appointmentDescription, priorityTag);
 
         return new ScheduleCommand(appointment, patient);
 

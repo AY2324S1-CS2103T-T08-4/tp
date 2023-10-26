@@ -6,6 +6,8 @@ import static seedu.address.logic.Messages.MESSAGE_PATIENT_DOES_NOT_EXIST;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -31,6 +33,8 @@ class JsonAdaptedAppointment {
     private final String end;
     private final String description;
 
+//    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+
     /**
      * Constructs a {@code JsonAdaptedAppointment} with the given appointment details.
      */
@@ -43,7 +47,9 @@ class JsonAdaptedAppointment {
         this.start = start;
         this.end = end;
         this.description = description;
-    }
+//        if (tagged != null) {
+//            this.tagged.addAll(tagged);
+        }
 
     /**
      * Converts a given {@code Appointment} into this class for Jackson use.

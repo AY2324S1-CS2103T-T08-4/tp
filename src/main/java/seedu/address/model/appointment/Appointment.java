@@ -3,11 +3,15 @@ package seedu.address.model.appointment;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.PriorityTag;
 
 /**
  * Represents an Appointment in the address book.
@@ -19,6 +23,8 @@ public class Appointment implements Comparable<Appointment> {
     private final Name patientName;
     private Person patient;
 
+    private Set<PriorityTag> priorityTag = new HashSet<>();
+
     /**
      * Constructs an {@code Appointment}.
      *
@@ -27,12 +33,14 @@ public class Appointment implements Comparable<Appointment> {
      * @param appointmentDescription The description for the appointment.
      */
     public Appointment(
-            Name patientName, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription) {
-        requireAllNonNull(patientName, appointmentTime, appointmentDescription);
+            Name patientName, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription,
+            PriorityTag priorityTag) {
+        requireAllNonNull(patientName, appointmentTime, appointmentDescription, priorityTag);
         this.patientName = patientName;
         this.appointmentTime = appointmentTime;
         this.patient = null;
         this.appointmentDescription = appointmentDescription;
+        this.priorityTag.add(priorityTag);
     }
 
     /**
@@ -76,6 +84,10 @@ public class Appointment implements Comparable<Appointment> {
 
     public AppointmentDescription getAppointmentDescription() {
         return this.appointmentDescription;
+    }
+
+    public Set<PriorityTag> getTags() {
+        return Collections.unmodifiableSet(this.priorityTag);
     }
 
     public Person getPerson() {
@@ -128,6 +140,7 @@ public class Appointment implements Comparable<Appointment> {
                 .add("patient", patient)
                 .add("appointmentTime", appointmentTime)
                 .add("description", appointmentDescription)
+                .add("priority", priorityTag)
                 .toString();
     }
 }
