@@ -18,6 +18,7 @@ import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.PriorityTag;
 
 /**
  * Jackson-friendly version of {@link Appointment}.
@@ -30,6 +31,7 @@ class JsonAdaptedAppointment {
     private final String start;
     private final String end;
     private final String description;
+    private final String priorityTag;
 
     /**
      * Constructs a {@code JsonAdaptedAppointment} with the given appointment details.
@@ -38,11 +40,13 @@ class JsonAdaptedAppointment {
     public JsonAdaptedAppointment(@JsonProperty("patientName") String patientName,
                                   @JsonProperty("start") String start,
                                   @JsonProperty("end") String end,
-                                  @JsonProperty("description") String description) {
+                                  @JsonProperty("description") String description,
+                                  @JsonProperty("priorityTag") String priorityTag) {
         this.patientName = patientName;
         this.start = start;
         this.end = end;
         this.description = description;
+        this.priorityTag = priorityTag;
     }
 
     /**
@@ -53,6 +57,7 @@ class JsonAdaptedAppointment {
         start = dateTimeToString(source.getStartTime());
         end = dateTimeToString(source.getEndTime());
         description = source.getAppointmentDescription().value;
+        priorityTag = String.valueOf(source.getPriorityTag());
     }
 
     /**
@@ -100,8 +105,18 @@ class JsonAdaptedAppointment {
         }
         final AppointmentDescription modelAppointmentDescription = new AppointmentDescription(description);
 
+        if (priorityTag == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, PriorityTag.class.getSimpleName()));
+        }
+
+        if (!PriorityTag.isValidPriorityTag(priorityTag)) {
+            throw new IllegalValueException(PriorityTag.MESSAGE_CONSTRAINTS);
+        }
+
+        final PriorityTag modelPriorityTag = new PriorityTag(priorityTag);
         return new Appointment(
-                patient, modelAppointmentTime, modelAppointmentDescription);
+                patient, modelAppointmentTime, modelAppointmentDescription, modelPriorityTag);
     }
 
 }

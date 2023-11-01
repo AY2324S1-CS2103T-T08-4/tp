@@ -77,8 +77,7 @@ public class UndiagnoseCommand extends Command {
             feedbackToUser.append(MESSAGE_ILLNESS_NOT_THERE);
             feedbackToUser.append(illnessesNotOriginallyThere);
         }
-        return new CommandResult(feedbackToUser.toString(),
-                false, false, true);
+        return new CommandResult(feedbackToUser.toString(), false, false, false, true);
     }
 
     /**

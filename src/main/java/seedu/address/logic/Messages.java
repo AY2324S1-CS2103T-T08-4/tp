@@ -87,7 +87,9 @@ public class Messages {
                 .append("; End: ")
                 .append(dateTimeToString(appointment.getEndTime()))
                 .append("; Description: ")
-                .append(appointment.getAppointmentDescription());
+                .append(appointment.getAppointmentDescription())
+                .append("; Priority Tag: ")
+                .append(appointment.getPriorityTag());
         return builder.toString();
     }
 }

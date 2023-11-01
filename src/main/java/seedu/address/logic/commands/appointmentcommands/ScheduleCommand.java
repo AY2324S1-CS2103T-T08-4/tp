@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PATIENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 
 import java.util.List;
@@ -31,12 +32,14 @@ public class ScheduleCommand extends Command {
             + PREFIX_APPOINTMENT_PATIENT + "PATIENT "
             + PREFIX_APPOINTMENT_START + "START "
             + PREFIX_APPOINTMENT_END + "END "
-            + PREFIX_APPOINTMENT_DESCRIPTION + "DESCRIPTION\n"
+            + PREFIX_APPOINTMENT_DESCRIPTION + "DESCRIPTION"
+            + PREFIX_APPOINTMENT_PRIORITY + "PRIORITYTAG\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_APPOINTMENT_PATIENT + "Alex Yeoh "
             + PREFIX_APPOINTMENT_START + "2023/10/20 12:00 "
             + PREFIX_APPOINTMENT_END + "2023/10/20 13:00 "
-            + PREFIX_APPOINTMENT_DESCRIPTION + "Follow up on Chest X-Ray ";
+            + PREFIX_APPOINTMENT_DESCRIPTION + "Follow up on Chest X-Ray "
+            + PREFIX_APPOINTMENT_PRIORITY + "high";
     public static final String MESSAGE_SUCCESS = "New appointment scheduled: %1$s.";
 
     private final Appointment currAppointment;
@@ -84,7 +87,7 @@ public class ScheduleCommand extends Command {
         model.addAppointment(currAppointment);
 
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS, Messages.format(currAppointment)), false, false, true);
+                String.format(MESSAGE_SUCCESS, Messages.format(currAppointment)), false, false, false, true);
     }
 
 

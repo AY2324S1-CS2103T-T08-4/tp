@@ -32,7 +32,8 @@ public class RescheduleCommandTest {
         Appointment appointmentToReschedule = model.getFilteredAppointmentList()
                 .get(INDEX_FIRST_APPOINTMENT.getZeroBased());
         Appointment rescheduledAppointment = new Appointment(appointmentToReschedule.getPerson(),
-                newAppointment.getAppointmentTime(), appointmentToReschedule.getAppointmentDescription());
+                newAppointment.getAppointmentTime(), appointmentToReschedule.getAppointmentDescription(),
+                appointmentToReschedule.getPriorityTag());
 
         RescheduleCommand rescheduleCommand = new RescheduleCommand(INDEX_FIRST_APPOINTMENT, newAppointmentTime);
         String expectedMessage = String.format(RescheduleCommand.MESSAGE_SUCCESS,
@@ -77,7 +78,8 @@ public class RescheduleCommandTest {
         Appointment appointmentToReschedule = model.getFilteredAppointmentList()
                 .get(INDEX_FIRST_APPOINTMENT.getZeroBased());
         Appointment rescheduledAppointment = new Appointment(appointmentToReschedule.getPerson(),
-                newAppointment.getAppointmentTime(), appointmentToReschedule.getAppointmentDescription());
+                newAppointment.getAppointmentTime(), appointmentToReschedule.getAppointmentDescription(),
+                appointmentToReschedule.getPriorityTag());
         RescheduleCommand rescheduleCommand = new RescheduleCommand(INDEX_FIRST_APPOINTMENT, newAppointmentTime);
         String expectedMessage = String.format(RescheduleCommand.MESSAGE_SUCCESS,
                 Messages.format(rescheduledAppointment));

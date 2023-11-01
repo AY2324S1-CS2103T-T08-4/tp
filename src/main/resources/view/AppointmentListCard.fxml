@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -26,6 +27,7 @@
                 </Label>
                 <Label fx:id="appointmentDescription" text="\$appointmentDescription" styleClass="cell_big_label" />
             </HBox>
+            <Label fx:id="priorityTag" text="\$priorityTag" />
             <Label fx:id="patientName" styleClass="cell_small_label" text="\$patientName" />
             <Label fx:id="appointmentTime" styleClass="cell_small_label" text="\$appointmentTime" />
         </VBox>

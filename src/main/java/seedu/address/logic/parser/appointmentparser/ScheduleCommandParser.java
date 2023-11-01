@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PATIENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_START;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Name;
+import seedu.address.model.tag.PriorityTag;
 
 /**
  * Parses input arguments and creates a new ScheduleCommand object
@@ -36,24 +38,28 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
     public ScheduleCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT_PATIENT, PREFIX_APPOINTMENT_START,
-                        PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION);
+                        PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION, PREFIX_APPOINTMENT_PRIORITY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_APPOINTMENT_PATIENT, PREFIX_APPOINTMENT_START,
-                PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION)
+                PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION, PREFIX_APPOINTMENT_PRIORITY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ScheduleCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPOINTMENT_PATIENT, PREFIX_APPOINTMENT_START,
-                PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION);
+                PREFIX_APPOINTMENT_END, PREFIX_APPOINTMENT_DESCRIPTION, PREFIX_APPOINTMENT_PRIORITY);
 
         LocalDateTime startTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_APPOINTMENT_START).get());
         LocalDateTime endTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_APPOINTMENT_END).get());
         AppointmentDescription appointmentDescription = ParserUtil.parseDescription(argMultimap
                 .getValue(PREFIX_APPOINTMENT_DESCRIPTION).get());
 
+        PriorityTag priorityTag = ParserUtil.parsePriorityTag(argMultimap
+                .getValue(PREFIX_APPOINTMENT_PRIORITY).get());
+
         AppointmentTime appointmentTime;
+
         try {
             appointmentTime = new AppointmentTime(startTime, endTime);
         } catch (IllegalArgumentException e) {
@@ -62,7 +68,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 
         Name patient = ParserUtil.parseName(argMultimap.getValue(PREFIX_APPOINTMENT_PATIENT).get());
 
-        Appointment appointment = new Appointment(patient, appointmentTime, appointmentDescription);
+        Appointment appointment = new Appointment(patient, appointmentTime, appointmentDescription, priorityTag);
 
         return new ScheduleCommand(appointment, patient);
 

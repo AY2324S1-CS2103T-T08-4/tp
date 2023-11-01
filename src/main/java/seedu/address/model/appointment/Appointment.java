@@ -8,6 +8,7 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.PriorityTag;
 
 /**
  * Represents an Appointment in the address book.
@@ -18,6 +19,7 @@ public class Appointment implements Comparable<Appointment> {
     private final AppointmentDescription appointmentDescription;
     private final Name patientName;
     private Person patient;
+    private PriorityTag priorityTag;
 
     /**
      * Constructs an {@code Appointment}.
@@ -27,12 +29,14 @@ public class Appointment implements Comparable<Appointment> {
      * @param appointmentDescription The description for the appointment.
      */
     public Appointment(
-            Name patientName, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription) {
+            Name patientName, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription,
+            PriorityTag priorityTag) {
         requireAllNonNull(patientName, appointmentTime, appointmentDescription);
         this.patientName = patientName;
         this.appointmentTime = appointmentTime;
         this.patient = null;
         this.appointmentDescription = appointmentDescription;
+        this.priorityTag = priorityTag;
     }
 
     /**
@@ -42,12 +46,14 @@ public class Appointment implements Comparable<Appointment> {
      * @param appointmentTime The scheduled time for the appointment.
      * @param appointmentDescription The description for the appointment.
      */
-    public Appointment(Person patient, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription) {
+    public Appointment(Person patient, AppointmentTime appointmentTime, AppointmentDescription appointmentDescription,
+                       PriorityTag priorityTag) {
         requireAllNonNull(appointmentTime);
         this.appointmentTime = appointmentTime;
         this.patient = patient;
         this.patientName = patient.getName();
         this.appointmentDescription = appointmentDescription;
+        this.priorityTag = priorityTag;
     }
 
     /**
@@ -82,6 +88,10 @@ public class Appointment implements Comparable<Appointment> {
         return this.patient;
     }
 
+    public PriorityTag getPriorityTag() {
+        return this.priorityTag;
+    }
+
     /**
      * Returns true if both appointments have the same time.
      * This defines a weaker notion of equality between two appointments.
@@ -109,7 +119,8 @@ public class Appointment implements Comparable<Appointment> {
         Appointment otherAppointment = (Appointment) other;
         return patient.equals(otherAppointment.patient)
                 && appointmentTime.equals(otherAppointment.appointmentTime)
-                && appointmentDescription.equals(otherAppointment.appointmentDescription);
+                && appointmentDescription.equals(otherAppointment.appointmentDescription)
+                && priorityTag.equals(otherAppointment.priorityTag);
     }
     @Override
     public int hashCode() {
@@ -128,6 +139,7 @@ public class Appointment implements Comparable<Appointment> {
                 .add("patient", patient)
                 .add("appointmentTime", appointmentTime)
                 .add("description", appointmentDescription)
+                .add("priorityTag", priorityTag)
                 .toString();
     }
 }

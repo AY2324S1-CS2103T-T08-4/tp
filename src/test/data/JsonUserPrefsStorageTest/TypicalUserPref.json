@@ -2,10 +2,11 @@
   "guiSettings" : {
     "windowWidth" : 1000.0,
     "windowHeight" : 500.0,
+    "lightMode": false,
     "windowCoordinates" : {
       "x" : 300,
       "y" : 100
     }
   },
-  "addressBookFilePath" : "addressbook.json"
+  "addressBookFilePath" : "mediflowr.json"
 }

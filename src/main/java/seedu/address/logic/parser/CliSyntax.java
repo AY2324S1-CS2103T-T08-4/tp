@@ -19,4 +19,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_APPOINTMENT_END = new Prefix("end=");
     public static final Prefix PREFIX_APPOINTMENT_DESCRIPTION = new Prefix("description=");
     public static final Prefix PREFIX_APPOINTMENT_PATIENT = new Prefix("patient=");
+    public static final Prefix PREFIX_APPOINTMENT_PRIORITY = new Prefix("priority=");
 }

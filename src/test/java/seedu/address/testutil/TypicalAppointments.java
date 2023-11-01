@@ -21,30 +21,31 @@ public class TypicalAppointments {
 
     public static final Appointment APPOINTMENT1 = new AppointmentBuilder()
             .withPatient(ALICE).withAppointmentTime("2023/10/10 10:00", "2023/10/10 11:00")
-            .withDescription("Checkup").build();
+            .withDescription("Checkup").withPriorityTag("high").build();
 
     public static final Appointment APPOINTMENT2 = new AppointmentBuilder()
             .withPatient(BENSON).withAppointmentTime("2023/01/29 21:00", "2023/01/29 23:30")
-            .withDescription("X-ray Checkup").build();
+            .withDescription("X-ray Checkup").withPriorityTag("low").build();
 
     // Manually added
     public static final Appointment APPOINTMENT3 = new AppointmentBuilder()
             .withPatient(HOON).withAppointmentTime("2021/04/18 15:00", "2023/04/18 17:30")
-            .withDescription("Follow-up").build();
+            .withDescription("Follow-up").withPriorityTag("medium").build();
 
     public static final Appointment APPOINTMENT4 = new AppointmentBuilder()
             .withPatient(IDA).withAppointmentTime("2022/06/13 15:00", "2022/06/13 16:30")
-            .withDescription("Follow-up").build();
+            .withDescription("Follow-up").withPriorityTag("high").build();
 
     public static final Appointment NOCLASHAPPOINTMENT = new AppointmentBuilder()
             .withPatient(ALICE).withAppointmentTime("3000/01/01 10:00", "3000/01/01 11:00")
-            .withDescription("Checkup").build();
+            .withDescription("Checkup").withPriorityTag("low").build();
 
     public static final Appointment TODAYAPPOINTMENT = new AppointmentBuilder()
             .withPatient(ALICE)
             .withAppointmentTime(
                     dateTimeToString(LocalDateTime.now()), dateTimeToString(LocalDateTime.now().plusMinutes(5)))
             .withDescription("Appointment Today")
+            .withPriorityTag("medium")
             .build();
 
     public static final Appointment UPCOMINGAPPOINTMENT = new AppointmentBuilder()
@@ -53,11 +54,12 @@ public class TypicalAppointments {
                     dateTimeToString(LocalDateTime.now().plusDays(1)),
                     dateTimeToString(LocalDateTime.now().plusDays(1).plusMinutes(5)))
             .withDescription("Appointment in Future")
+            .withPriorityTag("low")
             .build();
 
     public static final Appointment ANCIENT_APPOINTMENT = new AppointmentBuilder()
             .withPatient(HOON).withAppointmentTime("1800/04/18 15:00", "2023/04/18 17:30")
-            .withDescription("Stoned").build();
+            .withDescription("Stoned").withPriorityTag("medium").build();
 
     public static List<Appointment> getTypicalAppointments() {
         return new ArrayList<>(Arrays.asList(APPOINTMENT1, APPOINTMENT2, APPOINTMENT3, APPOINTMENT4));

@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.tag.PriorityTag;
+
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -23,6 +25,7 @@ public class AppointmentCard extends UiPart<Region> {
 
     public final Appointment appointment;
 
+
     @FXML
     private HBox cardPane;
     @FXML
@@ -33,6 +36,8 @@ public class AppointmentCard extends UiPart<Region> {
     private Label appointmentTime;
     @FXML
     private Label appointmentDescription;
+    @FXML
+    private Label priorityTag;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -44,5 +49,9 @@ public class AppointmentCard extends UiPart<Region> {
         patientName.setText("PATIENT: " + appointment.getPatientName());
         appointmentTime.setText(appointment.getAppointmentTime().toString());
         appointmentDescription.setText(appointment.getAppointmentDescription().value);
+
+        PriorityTag appointmentPriorityTag = appointment.getPriorityTag();
+        priorityTag.setText(appointmentPriorityTag.priority);
+        priorityTag.getStyleClass().add(appointmentPriorityTag.priority);
     }
 }

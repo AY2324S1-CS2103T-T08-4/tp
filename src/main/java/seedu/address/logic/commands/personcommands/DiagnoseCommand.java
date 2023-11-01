@@ -37,7 +37,7 @@ public class DiagnoseCommand extends Command {
             + PREFIX_ILLNESSES + "Fever, Headache";
 
     public static final String MESSAGE_DIAGNOSE_PERSON_SUCCESS = "Diagnosed Patient: %1$s";
-    public static final String MESSAGE_NOT_DIAGNOSED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_DIAGNOSED = "At least one field to diagnose must be provided.";
     public static final String MESSAGE_ALREADY_DIAGNOSED = "The following illnesses have already "
             + "been diagnosed before: ";
     private final Index targetIndex;
@@ -79,8 +79,7 @@ public class DiagnoseCommand extends Command {
             feedbackToUser.append(MESSAGE_ALREADY_DIAGNOSED);
             feedbackToUser.append(duplicateIllnesses);
         }
-        return new CommandResult(feedbackToUser.toString(),
-                false, false, true);
+        return new CommandResult(feedbackToUser.toString(), false, false, false, true);
     }
 
     /**

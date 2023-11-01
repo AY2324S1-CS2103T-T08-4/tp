@@ -9,6 +9,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
@@ -43,6 +44,9 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    // Dark/Light mode
+    private boolean lightMode;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -64,6 +68,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private Menu currentTime;
 
+    @FXML
+    private Button darkLightModeButton;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -76,6 +83,8 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+
+        setDarkLightMode(logic.getGuiSettings());
 
         setAccelerators();
 
@@ -163,6 +172,24 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    private void setDarkLightMode(GuiSettings guiSettings) {
+        lightMode = guiSettings.getLightMode();
+        System.out.println(lightMode);
+        if (lightMode) {
+            darkLightModeButton.setText("Dark Mode");
+            primaryStage
+                    .getScene()
+                    .getStylesheets()
+                    .add(getClass().getResource("/view/LightTheme.css").toExternalForm());
+        } else {
+            darkLightModeButton.setText("Light Mode");
+            primaryStage
+                    .getScene()
+                    .getStylesheets()
+                    .remove(getClass().getResource("/view/LightTheme.css").toExternalForm());
+        }
+    }
+
     /**
      * Opens the help window or focuses on it if it's already opened.
      */
@@ -185,14 +212,31 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), lightMode);
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    /**
+     * Changes the application's dark/light mode.
+     */
+    @FXML
+    private void handleDarkLightMode() {
+        lightMode = !lightMode;
+        if (lightMode) {
+            darkLightModeButton.setText("Dark Mode");
+            primaryStage
+                    .getScene()
+                    .getStylesheets()
+                    .add(getClass().getResource("/view/LightTheme.css").toExternalForm());
+        } else {
+            darkLightModeButton.setText("Light Mode");
+            primaryStage
+                    .getScene()
+                    .getStylesheets()
+                    .remove(getClass().getResource("/view/LightTheme.css").toExternalForm());
+        }
     }
 
     /**
@@ -212,6 +256,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isModeToggle()) {
+                handleDarkLightMode();
             }
 
             return commandResult;

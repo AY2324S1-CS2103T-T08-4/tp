@@ -47,6 +47,10 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FEVER = "fever";
     public static final String VALID_TAG_FLU = "flu";
 
+    public static final String INVALID_TAG_COVID = "COVID-19";
+
+    public static final String INVALID_TAG_HEPATITIS = "Hepatitis-B";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
@@ -61,7 +65,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_ONE_ILLNESS = " " + PREFIX_ILLNESSES + VALID_TAG_FLU;
     public static final String TAG_DESC_TWO_ILLNESSES = " " + PREFIX_ILLNESSES + VALID_TAG_FEVER + ", " + VALID_TAG_FLU;
-
+    public static final String TAG_DESC_DUPLICATE_ILLNESS = " " + PREFIX_ILLNESSES + VALID_TAG_FLU + ", "
+            + VALID_TAG_FLU;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "TEST"; // only MALE or FEMALE allowed
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -69,19 +74,19 @@ public class CommandTestUtil {
     public static final String INVALID_BIRTHDATE_DESC = " " + PREFIX_BIRTHDATE + "10-20-2001"; // only MM/DD/YYYY format
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_ILLNESSES + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC_TWO_INVALID_ILLNESSES = " " + PREFIX_ILLNESSES + INVALID_TAG_COVID
+            + ", " + INVALID_TAG_HEPATITIS;
+    public static final String TAG_DESC_ONE_INVALID_ONE_VALID_ILLNESS = " " + PREFIX_ILLNESSES + INVALID_TAG_COVID
+            + ", " + VALID_TAG_FLU;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-    public static final String TYPICAL_ILLNESS_1 = "AIDS";
-    public static final String TYPICAL_ILLNESS_2 = "COVID19";
-    public static final String TYPICAL_ILLNESS_3 = "FEVER";
+    public static final String TYPICAL_ILLNESS_1 = "flu";
+    public static final String TYPICAL_ILLNESS_2 = "fever";
+    public static final String TYPICAL_ILLNESS_3 = "COVID19";
     public static final String TYPICAL_ILLNESS_4 = "APPENDICITIS";
     public static final String TYPICAL_ILLNESS_5 = "SCHIZOPHRENIA";
     public static final String TYPICAL_ILLNESS_6 = "HEADACHE";
-
-
-    public static final String INVALID_ILLNESS_1 = "COVID-19";
-
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
@@ -166,7 +171,7 @@ public class CommandTestUtil {
      */
     public static Set<Tag> createTypicalIllnessSet() {
         Set<Tag> set = new HashSet<>();
-        set.add(new Tag(TYPICAL_ILLNESS_1));
+        set.add(new Tag(VALID_TAG_FLU));
         return set;
     }
 
@@ -175,8 +180,8 @@ public class CommandTestUtil {
      */
     public static Set<Tag> createTypicalIllnessesSet() {
         Set<Tag> set = new HashSet<>();
-        set.add(new Tag(TYPICAL_ILLNESS_1));
-        set.add(new Tag(TYPICAL_ILLNESS_2));
+        set.add(new Tag(VALID_TAG_FLU));
+        set.add(new Tag(VALID_TAG_FEVER));
         return set;
     }
 
